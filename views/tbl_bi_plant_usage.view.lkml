@@ -455,30 +455,5 @@ view: tbl_bi_plant_usage {
     sql: ${pu_inv_amt_per_day} ;;
   }
 
-  measure: dep_cost_amt {
-    type: sum
-    sql: ${pu_cost_amt_per_day_dep} ;;
-  }
-
-  measure: ext_repair {
-    type: sum
-    sql: ${pu_cost_amt_per_day_ext} ;;
-  }
-
-  measure: ind_cost {
-    type: sum
-    sql: ${pu_cost_amt_per_day_ind} ;;
-  }
-
-  measure: labour_cost {
-    type: sum
-    sql: ${pu_cost_amt_per_day_lab} ;;
-  }
-
-  measure: spare_part {
-    type: sum
-    sql: ${pu_cost_amt_per_day_par} ;;
-  }
-
 
 }
