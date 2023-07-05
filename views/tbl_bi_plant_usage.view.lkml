@@ -113,9 +113,19 @@ view: tbl_bi_plant_usage {
     sql: ${TABLE}.PU_Cost_AmtPerDay_Ext ;;
   }
 
+  measure: total_pu_cost_amt_per_day_ext {
+    type: sum
+    sql: ${pu_cost_amt_per_day_ext} ;;
+  }
+
   dimension: pu_cost_amt_per_day_ind {
     type: number
     sql: ${TABLE}.PU_Cost_AmtPerDay_Ind ;;
+  }
+
+  measure: total_pu_cost_amt_per_day_ind {
+    type: sum
+    sql: ${pu_cost_amt_per_day_ind} ;;
   }
 
   dimension: pu_cost_amt_per_day_lab {
@@ -123,9 +133,19 @@ view: tbl_bi_plant_usage {
     sql: ${TABLE}.PU_Cost_AmtPerDay_Lab ;;
   }
 
+  measure: total_pu_cost_amt_per_day_lab {
+    type: sum
+    sql: ${pu_cost_amt_per_day_lab} ;;
+  }
+
   dimension: pu_cost_amt_per_day_par {
     type: number
     sql: ${TABLE}.PU_Cost_AmtPerDay_Par ;;
+  }
+
+  measure: total_pu_cost_amt_per_day_par {
+    type: sum
+    sql: ${pu_cost_amt_per_day_par} ;;
   }
 
   dimension: pu_created_by {
@@ -206,6 +226,11 @@ view: tbl_bi_plant_usage {
   dimension: pu_inv_amt_per_day {
     type: number
     sql: ${TABLE}.PU_Inv_AmtPerDay ;;
+  }
+
+  measure: total_pu_inv_amt_per_day {
+    type: sum
+    sql: ${pu_inv_amt_per_day} ;;
   }
 
   dimension: pu_inv_base_amt {
@@ -302,6 +327,7 @@ view: tbl_bi_plant_usage {
     type: number
     sql: ${TABLE}.PU_Inv_RentPrdInDays ;;
   }
+
 
   dimension_group: pu_inv_rent_to {
     type: time
@@ -412,4 +438,47 @@ view: tbl_bi_plant_usage {
     type: count
     drill_fields: [pu_created_time]
   }
+
+  measure: totalCost {
+    type: number
+    sql:  ${total_pu_cost_amt_per_day_dep} + ${total_pu_cost_amt_per_day_ext} + ${total_pu_cost_amt_per_day_ind}
+    + ${total_pu_cost_amt_per_day_lab} + ${total_pu_cost_amt_per_day_par};;
+  }
+
+  measure: revenue {
+    type: number
+    sql: ${total_pu_inv_amt_per_day} - ${totalCost} ;;
+  }
+
+  measure: income {
+    type: sum
+    sql: ${pu_inv_amt_per_day} ;;
+  }
+
+  measure: dep_cost_amt {
+    type: sum
+    sql: ${pu_cost_amt_per_day_dep} ;;
+  }
+
+  measure: ext_repair {
+    type: sum
+    sql: ${pu_cost_amt_per_day_ext} ;;
+  }
+
+  measure: ind_cost {
+    type: sum
+    sql: ${pu_cost_amt_per_day_ind} ;;
+  }
+
+  measure: labour_cost {
+    type: sum
+    sql: ${pu_cost_amt_per_day_lab} ;;
+  }
+
+  measure: spare_part {
+    type: sum
+    sql: ${pu_cost_amt_per_day_par} ;;
+  }
+
+
 }
