@@ -439,6 +439,8 @@ view: tbl_bi_plant_usage {
     drill_fields: [pu_created_time]
   }
 
+
+
   measure: totalCost {
     type: number
     sql:  ${total_pu_cost_amt_per_day_dep} + ${total_pu_cost_amt_per_day_ext} + ${total_pu_cost_amt_per_day_ind}
